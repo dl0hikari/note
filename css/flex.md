@@ -37,9 +37,12 @@ justify-content 项目在主轴上的对齐方式
 align-item 项目在交叉轴上的对齐方式
 align-content 多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
  
+
+ ```css
 .box{
         justify-content: flex-start | flex-end | center | space-between | space-around; /* 项目在主轴上的对齐方式 */
 }
+```
  
  
 /* 如果项目未设置高度或设为auto，stretch 将占满整个容器的高度 */
