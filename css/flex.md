@@ -1,7 +1,9 @@
-任何一个容器都可以指定为Flex布局
+# 任何一个容器都可以指定为Flex布局
+<style>
 .box{
         display: flex|inline-flex;
 }
+</style>
  
 ps:webkit内核
 .box{
