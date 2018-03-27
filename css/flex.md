@@ -26,9 +26,12 @@ box为Flex容器，box的所有子元素为容器成员，称为Flex项目（fle
 ```
 
 flex-direction 与 flex-wrap的简写 flex-flow   
+
+```css
 .box{
         flex-flow: row nowrap;
 }
+```
  
 justify-content 项目在主轴上的对齐方式
 align-item 项目在交叉轴上的对齐方式
