@@ -1,22 +1,32 @@
 # 任何一个容器都可以指定为Flex布局
-<style>
+
+```css
 .box{
         display: flex|inline-flex;
 }
-</style>
- 
+```
+
+ * 123
+
 ps:webkit内核
+
+```css
 .box{
         display: -webkit-flex; /* Sarari */
         display: flex;
 }
+```
  
 box为Flex容器，box的所有子元素为容器成员，称为Flex项目（flex item）,简称“项目”。
 容器属性：
+
+```css
 .box{
         flex-direction: row | row-reverse | column | column-reverse; /* 决定主轴的方向 */
         flex-wrap: nowrap| wrap | wrap-reverse;  /* 决定一条轴线排不下，如何换行 */
 }
+```
+
 flex-direction 与 flex-wrap的简写 flex-flow   
 .box{
         flex-flow: row nowrap;
