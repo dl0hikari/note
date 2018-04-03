@@ -9,10 +9,14 @@
 * 类Setext
 类Setext形式使用底线的形式
 
->This is an H1
-========
-This is an H2
-\_____________
+> This is an H1
+>
+> ========
+>
+> This is an H2
+>
+> \_____________
+
 
 * 类Atx
 
