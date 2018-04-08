@@ -94,7 +94,7 @@
 >
 >\**double asterisks**
 >
->\__double underscores__
+>\_\_double underscores__
 
 *single asterisks*
 
