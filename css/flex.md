@@ -13,7 +13,7 @@ ps:webkit内核
         display: flex;
 }
 ```
- 
+
 box为Flex容器，box的所有子元素为容器成员，称为Flex项目（flex item）,简称“项目”。
 
 -------
@@ -27,42 +27,42 @@ box为Flex容器，box的所有子元素为容器成员，称为Flex项目（fle
 }
 ```
 
-flex-direction 与 flex-wrap的简写 flex-flow   
+flex-direction 与 flex-wrap的简写 flex-flow
 
 ```css
 .box{
         flex-flow: row nowrap;
 }
 ```
- 
+
 >justify-content 项目在主轴上的对齐方式
 >
->align-item 项目在交叉轴上的对齐方式
+>align-items 项目在交叉轴上的对齐方式
 >
 >align-content 多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
- 
+
 
  ```css
 .box{
         justify-content: flex-start | flex-end | center | space-between | space-around; /* 项目在主轴上的对齐方式 */
 }
 ```
- 
- 
-> 如果项目未设置高度或设为auto，stretch 将占满整个容器的高度 
+
+
+> 如果项目未设置高度或设为auto，stretch 将占满整个容器的高度
 
 
 ```css
 .box{
-        align-items: stretch | flex-start | flex-end | center | baseline ;  /* 项目在交叉轴上的对齐方式 */ 
+        align-items: stretch | flex-start | flex-end | center | baseline ;  /* 项目在交叉轴上的对齐方式 */
 }
 ```
- 
-> 多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用 
+
+> 多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
 
 ```css
 .box{
-        align-content: stretch | flex-start | flex-end | center | space-between | space-around; 
+        align-content: stretch | flex-start | flex-end | center | space-between | space-around;
 }
 ```
 
@@ -113,3 +113,7 @@ flex-direction 与 flex-wrap的简写 flex-flow
 >该属性可能取6个值，除了auto，其他都与align-items属性完全一致。
 
 >来源：http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+
+*   一列表项包含一个列表区块：
+
+        <代码写在这>
