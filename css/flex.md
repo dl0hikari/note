@@ -98,7 +98,7 @@ flex-direction 与 flex-wrap的简写 flex-flow
 
 ```css
 .item{
-        flex: none | 0 1 auto | 0;
+        flex: none | 0 1 auto | auto;
 }
 ```
 
