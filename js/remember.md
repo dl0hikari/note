@@ -37,3 +37,42 @@ arr.toString();
 
 
 # chrome 控制台最后一行输出的是 表达式或语句返回的值
+
+# svg向下兼容优雅降级技术
+1. image标签降级技术
+```html
+<svg>
+    <image xlink:href="svg.svg" src="svg.png" />
+</svg>
+
+```
+2. Modernizr库
+使用svg作为background-image
+```css
+.mysvg{
+    background-image: url(image.svg);
+}
+.no-svg .mysvg{
+    background-image: url(image.png);
+}
+```
+3. 使用\<object>标签需要对不支持svg的浏览器进行判断
+```html
+<object> type="image/svg+xml" data="image.svg" class="mysvg"></object>
+```
+```css
+.no-svg .mysvg{
+    display: block;
+    background-img: url(image.png);
+}
+```
+4. svg作为\<img>
+```html
+<img src="img.svg" onerror="this.src=image.png">
+```
+或
+```js
+if(!Modernizr.svg){
+    $("img[src$='.svg']").attr('src', fallback);
+}
+```
