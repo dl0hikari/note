@@ -55,6 +55,13 @@ arr.toString();
 .no-svg .mysvg{
     background-image: url(image.png);
 }
+
+//css3多背景
+.mysvg{
+    background-image: url(image.png);
+    background-image: url(image.svg), none;
+}
+
 ```
 3. 使用\<object>标签需要对不支持svg的浏览器进行判断
 ```html
@@ -75,4 +82,12 @@ arr.toString();
 if(!Modernizr.svg){
     $("img[src$='.svg']").attr('src', fallback);
 }
+```
+5. "inline"svg
+>把SVG代码从SVG文件里拷贝出来，直接粘贴掉HTML里使用，它们跟你直接使用普通图片的效果一样。这样做的好处是图片数据就在HTML页面里，不需要浏览器单独执行一次请求下载它。换句话说，它跟使用Data URI的优势一样。但不好的地方也是一样。比如“臃肿”的页面代码，缓存问题等。
+
+```html
+<body>
+    <!-- 把SVG代码粘贴到这里，图片会显示出来！  -->
+</body>
 ```
