@@ -103,3 +103,8 @@ _single underscores_
 **double asterisks**
 
 __double underscores__
+
+## 表
+|默认左对齐|左对齐紫薯布丁|中间对齐紫薯布丁|右对齐紫薯布丁|
+|-|:-|:-:|-:|
+|紫薯布丁|紫薯布丁|紫薯布丁|紫薯布丁|
