@@ -8,4 +8,4 @@
 
 > Unauthorized vehicles will be wheel clamped or towed away.- 未经许可停放的车辆将会被轮夹锁住或拖走。
 
-> Since 1987,the amount of money available to buy books has fallen by 17%.-自1978年以来，可用于采购图书的经费已经减少了17%。 test
+> Since 1987,the amount of money available to buy books has fallen by 17%.-自1978年以来，可用于采购图书的经费已经减少了17%。 
