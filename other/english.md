@@ -11,3 +11,5 @@
 > Since 1987,the amount of money available to buy books has fallen by 17%.-自1978年以来，可用于采购图书的经费已经减少了17%。
 
 > iterating_var in sequence: statements(s)
+
+> Twenty-eight is divisible by seven.- 28可以被7除尽
