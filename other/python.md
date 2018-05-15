@@ -215,8 +215,8 @@ with open('sina.html', 'wb') as f:
 服务器：
 由于服务器会有大量来自客户端的连接，所以，服务器要能够区分一个Socket连接是和哪个客户端绑定的。一个Socket依赖4项：服务器地址、服务器端口、客户端地址、客户端端口来唯一确定一个Socket。
 
-```py server.py
-
+```py
+# server.py
 import socket
 import time, threading
 
@@ -246,7 +246,8 @@ while True:
     t = threading.Thread(target=tcplink, args=(sock, addr))
     t.start()
 ```
-```py client.py
+```py
+# client.py
 import socket
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -260,3 +261,63 @@ for data in [b'Michael', b'Tracy', b'Sarah']:
 s.send(b'exit')
 s.close()
 ```
+
+# UDP编程
+和TCP类似，使用UDP的通信双方也分为客户端和服务器。服务器首先需要绑定端口：
+```py
+# server.py
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #SOCK_DGRAM 指定Socket的类型是UDP
+
+s.bind(('127.0.0.1', 9999))
+
+print('Bind UDP on 9999...')
+while True:
+    # 接收数据
+    data, addr = s.recvfrom(1024)
+    print('Received from %s:%s.' % addr)
+    s.sendto(b'Hello, %s!' % data, addr) #直接调用sendto()就可以把数据用UDP发给客户端
+```
+```py
+# client.py
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+for data in [b'Michael', b'Tracy', b'Sarah']:
+    # 发送数据
+    s.sendto(data, ('127.0.0.1', 9999))
+    # 接收数据
+    print(s.recv(1024).decode('utf-8'))
+s.close()
+```
+
+# WSGI   (Web Server Gateway Interface)
+Python 内置了一个WSGI服务器，这个模块叫wsgiref
+
+```py
+# hello.py
+
+def application(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/html')])
+    return [b'<h1>Hello, web!</h1>']
+```
+
+```py
+# server.py
+# 从wsgiref模块导入:
+from wsgiref.simple_server import make_server
+# 导入我们自己编写的application函数:
+from hello import application
+
+# 创建一个服务器，IP地址为空，端口是8000，处理函数是application:
+httpd = make_server('', 8000, application)
+print('Serving HTTP on port 8000...')
+# 开始监听HTTP请求:
+httpd.serve_forever()
+```
+
+# 使用Web框架
+  Flask
+
+# 使用模板
+  jinja2
