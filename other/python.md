@@ -76,7 +76,18 @@ True
 ```
 
 # 装饰器
+假设我们要增强now()函数的功能，比如，在函数调用前后自动打印日志，但又不希望修改now()函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）
 
+```py
+import functools
+
+def log(func):
+    @functools.wraps(func) # 没明白
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+```
 
 # __slots__
 __slots__变量限制class能添加的属性。 使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的。
@@ -141,3 +152,111 @@ def test(name, age, *args, city, job)
 ```
 4.参数组合
 > 参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。
+
+# 检查是否是方法
+1. 根据__call__属性判断
+```py
+add = lambda a, b: a + b
+if (hasattr(add, "__call__")):
+    print(add(1, 3))
+```
+2. 用isfunction判断
+```py
+from inspect import isfunction
+
+add = lambda a, b: a + b
+if (isfunction(add)):
+    print(add(1, 3))
+```
+# python字符串前u、r、b的含义
+1.字符串前加u
+例：u"我是含有中文字符组成的字符串。"
+作用：后面字符串以 Unicode 格式 进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。
+2.字符串前加r
+例：r"\n\n\n\n\n\n
+作用：声明后面的字符串是普通字符串，相对的，特殊字符串中含有：转义字符 \n \t 什么什么的。
+3.b
+做用：python3.x里默认的str是(py2.x里的)unicode, bytes是(py2.x)的str, b”“前缀代表的就是bytes
+　　　python2.x里, b前缀没什么具体意义， 只是为了兼容python3.x的这种写法
+
+在Python 3.x版本中，把'xxx'和u'xxx'统一成Unicode编码，即写不写前缀u都是一样的，而以字节形式表示的字符串则必须加上b前缀：b'xxx'。
+
+# TCP编程
+通常我们用一个Socket表示“打开了一个网络链接”，而打开一个Scoket需要知道目标计算机的IP地址和端口号，再制定协议类型即可。
+客户端：
+```py
+#导入socket库
+import socket
+
+# 创建一个socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# 建立连接
+s.connect(("www.sina.com.cn", 80))
+# 发送数据:
+s.send(b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n')
+buffer = []
+while True:
+    # 每次最多接受1k字节
+    d = s.recv(1024) # recv(max)
+    if d:
+        buffer.append(d)
+    else:
+        break
+data = b''.join(buffer)
+
+s.close()
+
+header, html = data.split(b'\r\n\r\n', 1) # split(str="", num) num--分割次数
+print(header.decode('utf-8'))
+# 把接收的数据写入文件
+with open('sina.html', 'wb') as f:
+    f.write(html)
+```
+服务器：
+由于服务器会有大量来自客户端的连接，所以，服务器要能够区分一个Socket连接是和哪个客户端绑定的。一个Socket依赖4项：服务器地址、服务器端口、客户端地址、客户端端口来唯一确定一个Socket。
+
+```py server.py
+
+import socket
+import time, threading
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # 首先创建一个基于IPv4和TCP协议的Scoket
+
+s.bind(('127.0.0.1', 9999)) # 绑定监听的地址和端口
+
+s.listen(5) # listen()方法开始监听端口，传入的参数指定等待连接的最大数量：
+print('Waiting for connection...')
+
+def tcplink(sock, addr):
+    print('Accept new connection from %s %s...' % addr)
+    sock.send(b'Welcome!')
+    while True:
+        data = sock.recv(1024)
+        time.sleep(1)
+        if not data or data.decode('utf-8') == 'exit':
+            break
+        sock.send(('Hello, %s!' % data.decode('utf-8')).encode('utf-8'))
+    sock.close()
+    print('Connection form %s:%s closed.' % addr)
+
+while True:
+    # 接受一个新连接
+    sock, addr = s.accept()
+    # 创建新线程来处理TCP连接
+    t = threading.Thread(target=tcplink, args=(sock, addr))
+    t.start()
+```
+```py client.py
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('127.0.0.1', 9999))
+
+print(s.recv(1024).decode('utf-8'))
+
+for data in [b'Michael', b'Tracy', b'Sarah']:
+    s.send(data)
+    print(s.recv(1024).decode('utf-8'))
+s.send(b'exit')
+s.close()
+```
