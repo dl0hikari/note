@@ -169,13 +169,13 @@ if (isfunction(add)):
     print(add(1, 3))
 ```
 # python字符串前u、r、b的含义
-1.字符串前加u
+1. 字符串前加u
 例：u"我是含有中文字符组成的字符串。"
 作用：后面字符串以 Unicode 格式 进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。
-2.字符串前加r
+2. 字符串前加r
 例：r"\n\n\n\n\n\n
 作用：声明后面的字符串是普通字符串，相对的，特殊字符串中含有：转义字符 \n \t 什么什么的。
-3.b
+3. b
 做用：python3.x里默认的str是(py2.x里的)unicode, bytes是(py2.x)的str, b”“前缀代表的就是bytes
 　　　python2.x里, b前缀没什么具体意义， 只是为了兼容python3.x的这种写法
 
@@ -291,15 +291,15 @@ for data in [b'Michael', b'Tracy', b'Sarah']:
 s.close()
 ```
 
-# WSGI   (Web Server Gateway Interface)
+# WSGI接口   (Web Server Gateway Interface)
 Python 内置了一个WSGI服务器，这个模块叫wsgiref
 
 ```py
 # hello.py
 
 def application(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'text/html')])
-    return [b'<h1>Hello, web!</h1>']
+    start_response('200 OK', [('Content-Type', 'text/html')]) # 报文首部 {状态行、响应首部字段、通用首部字段、实体首部字段、其他}
+    return [b'<h1>Hello, web!</h1>'] #报文主体
 ```
 
 ```py
@@ -318,6 +318,29 @@ httpd.serve_forever()
 
 # 使用Web框架
   Flask
+> pip install flask
 
+```py
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return '<h1>Home</h1>'
+...
+```
 # 使用模板
-  jinja2
+Flask默认支持的模板是jinja2
+> pip install jinja2
+
+```py
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return render_template('home.html') # 模板在同级的templates目录下
+...
+```
