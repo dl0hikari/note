@@ -33,6 +33,8 @@ def fib(max):
     <generator object fib at 0x104feaaa0>
 ```
 # 迭代器
+迭代是重复反馈过程的活动，其目的通常是为了逼近所需目标或结果。每一次对过程的重复称为一次“迭代”，而每一次迭代得到的结果会作为下一次迭代的初始值。
+
 可以直接作用于for循环的数据类型有以下几种：
 一类是集合数据类型，如 list、tuple、dict、set、str等；
 一类是generator，包括生成器和带yield的generator function。
@@ -292,7 +294,7 @@ s.close()
 ```
 
 # WSGI接口   (Web Server Gateway Interface)
-Python 内置了一个WSGI服务器，这个模块叫wsgiref
+Python 内置了一个WSGI服务器，这个模块叫wsgiref,让我们不必关心HTTP请求、解析、发送等操作，只专心用Python编写web业务
 
 ```py
 # hello.py
@@ -329,6 +331,8 @@ app = Flask(__name__)
 def home():
     return '<h1>Home</h1>'
 ...
+if __name__ == '__main__':
+    app.run()
 ```
 # 使用模板
 Flask默认支持的模板是jinja2
@@ -343,4 +347,33 @@ app = Flask(__name__)
 def home():
     return render_template('home.html') # 模板在同级的templates目录下
 ...
+if __name__ == '__main__':
+    app.run()
 ```
+
+# Coroutine 协程（协同程序）
+子程序，或者称为函数。是通过栈实现的，一个线程就是执行一个子程序。子程序调用总是一个入口，一次返回，调用顺序是明确的。而协程的调用和子程序不同。协程看上去也是子程序，但是在执行的过程中， 在子程序内部可中断，然后转而执行别的子程序，在适当的时候再返回来接着执行。
+
+协程的特点在于是一个线程执行，那和多线程比，协程有什么优势？
+
+1. 最大的优势就是协程极高的执行效率。因为子程序切换不是线程切换，而是有程序自身控制，因此没有线程切换的开销，和多线程比，程序数量越多，协程的性能优势就越明显。
+2. 第二大优势就是不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。
+
+Python对协程的支持是通过generator实现的
+
+# asyncio
+1. asyncio提供了完善的异步IO支持；
+2. 异步操作需要在coroutine中通过yield from完成；
+3. 多个coroutine可以封装成一组Task然后并发执行。
+
+# async/await
+请注意，async和await是针对coroutine的新语法，要使用新的语法，只需要做两步简单的替换：
+1. 把@asyncio.coroutine替换为async；
+2. 把yield from替换为await。
+
+# aiohttp
+
+
+# IDLE （shell）
+
+# BIF (Built-in functions)
