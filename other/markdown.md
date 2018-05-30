@@ -46,6 +46,11 @@
 >
 >     return shell_exec("echo $input | $markdown_script");
 
+## 嵌套
+>ddddd
+>>dddddd
+>>>sssss
+
 ## 列表
 
 无序符号* + -
@@ -95,6 +100,8 @@
 >\**double asterisks**
 >
 >\_\_double underscores__
+>
+>\~\~abc\~\~
 
 *single asterisks*
 
@@ -104,7 +111,10 @@ _single underscores_
 
 __double underscores__
 
+~~abc~~
+
 ## 表
 |默认左对齐|左对齐紫薯布丁|中间对齐紫薯布丁|右对齐紫薯布丁|
 |-|:-|:-:|-:|
 |紫薯布丁|紫薯布丁|紫薯布丁|紫薯布丁|
+

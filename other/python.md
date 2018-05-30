@@ -104,6 +104,26 @@ MixIn的目的就是给一个类增加多个功能，这样，在设计类的时
 
 # Enum类
  枚举类
+ ```py
+from enum import Enum
+Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+
+Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+for name, member in Month.__members__.items():
+    print(name, '=>', member, ',', member.value)
+ ```
+> Jan => Month.Jan , 1<br>
+> Feb => Month.Feb , 2<br>
+> Mar => Month.Mar , 3<br>
+> Apr => Month.Apr , 4<br>
+> May => Month.May , 5<br>
+> Jun => Month.Jun , 6<br>
+> Jul => Month.Jul , 7<br>
+> Aug => Month.Aug , 8<br>
+> Sep => Month.Sep , 9<br>
+> Oct => Month.Oct , 10<br>
+> Nov => Month.Nov , 11<br>
+> Dec => Month.Dec , 12<br>
 
 #断言
 
@@ -377,3 +397,18 @@ Python对协程的支持是通过generator实现的
 # IDLE （shell）
 
 # BIF (Built-in functions)
+
+# 类中 双下划线开头定义的变量为私有变量 通常不可用实例直接调用，但不是绝对可以用实例._类名__属性(例如：stu._Student__age)调用
+
+
+
+> **package**: <br >tkinter<br > pygame <br >types
+
+# 特殊变量
+```py
+# __str__与 __repr__
+# __iter)__ __next__
+# __getitem__ __setitem__
+# __getattr__
+# __call__
+```

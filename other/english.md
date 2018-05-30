@@ -13,3 +13,7 @@
 > iterating_var in sequence: statements(s)
 
 > Twenty-eight is divisible by seven.- 28可以被7除尽
+
+> When I was 17, I packed my bags and left home.- 17岁时，我背起行囊离开了家。(vt. (把...)打包；塞进；拥进 (使)聚成集团)
+
+> The signal will be converted into digital code. - 信号会被转变为数字代码
