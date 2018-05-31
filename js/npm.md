@@ -23,3 +23,8 @@
 
 # windows-build-tools
 > npm install --global --production windows-build-tools
+
+> sudo apt-get remove --auto-remove --purge packagename
+
+> sudo apt-get install packagename
+

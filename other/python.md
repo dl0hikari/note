@@ -106,7 +106,6 @@ MixIn的目的就是给一个类增加多个功能，这样，在设计类的时
  枚举类
  ```py
 from enum import Enum
-Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
 
 Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
 for name, member in Month.__members__.items():
@@ -125,7 +124,43 @@ for name, member in Month.__members__.items():
 > Nov => Month.Nov , 11<br>
 > Dec => Month.Dec , 12<br>
 
-#断言
+@unique 装饰器可以帮助我们检查保证没有重复值
+
+```py
+from enum import Enum, unique
+
+@unique
+class Weekday(Enum):
+    Sun = 0
+    Mon = 1
+    Tue = 2
+    Wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
+day1 = Weekday.Sun
+print(Weekday.Mon.value)
+print(Weekday[1])
+print(Weekday(1))
+```
+
+# 元类
+metaclass是Python面向对象里最难理解，也是最难使用的 **魔术代码**。正常情况下，你不会碰到需要使用metaclass的情况，所以先pass
+
+
+可以动态创建出类
+```py
+def fn(self, name='world'):
+    print('Hello, %s.' % name)
+
+Hello = type('Hello', (object, ), dict(hello=fn))
+
+h = Hello()
+print(h.hello())
+```
+通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class
+
+# 断言
 
 ```py
 ...
@@ -400,9 +435,143 @@ Python对协程的支持是通过generator实现的
 
 # 类中 双下划线开头定义的变量为私有变量 通常不可用实例直接调用，但不是绝对可以用实例._类名__属性(例如：stu._Student__age)调用
 
+# 错误处理
+所有的错误类型都继承自BaseException
+
+```py
+import logging
+try:
+    pass
+except Exception as e:
+    loggin.exception(e)
+finally:
+    pass
+
+```
+自编错误类 使用 **raise** 语句抛出
+```py
+class FooError(ValueError):
+    pass
+
+def foo(s):
+    n = int(s)
+    if n==0:
+        raise FooError('invalid value: %s' % s)
+    return 10 / n
+
+foo('0')
+```
+只要处理不了 就向上抛raise
+```py
+def foo(s):
+    n = int(s)
+    if n==0:
+        raise ValueError('invalid value: %s' % s)
+    return 10 / n
+
+def bar():
+    try:
+        foo('0')
+    except ValueError as e:
+        print('ValueError!')
+        raise
+
+bar()
+
+```
+# 调试
+1. print 方法打印
+2. assert 断言
+关闭断言 大写的O
+> $ python -O err.py
+3. loggin
+```py
+import logging
+logging.basicConfig(level=logging.INFO) #DEBUG, INFO, WARNING, ERROR
+
+logging.info("n = %d" % n) #根据上面设置的等级 使用对应的方法 logging.debug()/logging.warning/logging.error
+```
+4. pbd 调试
+> $ python -m pdb test.py
+启动后输入命令 **l**查看代码 **n**单步执行代码 **p**查看变量 **q** 退出
+
+> **package**: <br >tkinter<br > pygame <br >types <br >logging<br >
+
+在py文件中 可能出错的地方放一个pdb.set_trace() 可以设置断点
+```py
+import pdb
+
+s = '0'
+n = int(s)
+pdb.set_trace() # 运行到这里会自动暂停
+print(10 / n)
+```
+
+# 单元测试
+要引入Python自带的unittest模块
+1. 编写单元测试时，需要编写一个测试类，从unittest.TestCase继承.
+2. 以test开头定义方法名，否则测试的时候不会执行
+3. unittest.TestCase 提供了很多内置判断条件 常用的时assertEqual()、assertTrue()
+4. 编好的单元测试，我们就可以运行单元测试。最简单的运行方式时在脚本的最后加上两行代码if __name__ == '__main__':unittest.main()
+5. 另一种方法时在命令行通过参数 -m unittest直接运行单元测试：
+> python -m unittest mydict_test.py
+6. setUp与tearDown
 
 
-> **package**: <br >tkinter<br > pygame <br >types
+```py
+# mydict_test.py
+from m import Dist
+import unittest
+
+class TestDict(unittest.TestCase):
+
+    def setUp(self):  #这两个方法貌似放在那个位置都可以  最先执行setUp 最后执行tearDown
+        print('setUp...')
+
+    def tearDown(self):
+        print('tearDown...')
+
+    def test_haha(self):
+        d = Dist(a = 1, b = 'test')
+        self.assertEqual(d.a, 1)
+        self.assertEqual(d.b, 'test')
+        self.assertTrue(isinstance(d, dict))
+
+if __name__ == '__main__':  # 两行代码
+    unittest.main()
+```
+```py
+# m.py
+#！ /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+'a test script'
+
+__author__ = 'alex'
+
+class Dist(dict):
+
+    def __init__(self, **kw):
+        super().__init__(self, **kw)
+
+    def __getattr__(self, key):
+        try:
+            return self[key]
+        except KeyError:
+            raise AttributeError(r"'Dist' object has no attribute '%s'" % key)
+
+    def __setattr__(self, key, value):
+        self[key] = value
+```
+另一种重要的断言就是期待抛出指定类型的Error,比如通过d['emptyp']访问不存在的key是，断言会抛出KeyError:
+
+```py
+width self.assertRaises(KeyError):
+    value = d['empty']
+```
+# 文档测试
+pass
+
 
 # 特殊变量
 ```py
