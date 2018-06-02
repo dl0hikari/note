@@ -572,6 +572,135 @@ width self.assertRaises(KeyError):
 # 文档测试
 pass
 
+# 文件读写
+如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便：
+```py
+
+for line in f.readlines():
+    print(line.strip()) # 把末尾的'\n'删掉
+```
+
+为什么open txt文件时需要指定utf8编码？ 这是根据系统的编码决定的 如果系统编码为utf8 就不用添加encoding='utf-8'
+```py
+# 查看系统编码
+
+import locale
+print(locale.getpreferredencoding())
+
+# >>> cp936
+```
+
+# StringIO和BytesIO
+很多时候，数据读写不一定是文件，也可以在内存中读写。
+StringIO顾名思义就是在内存中读写str。
+```py
+from io import StringIO
+f = StringIO()
+f.write('hello')
+# >>> 5
+f.write(' ')
+# >>> 1
+f.write('world!')
+# >>> 6
+print(f.getvalue())
+# >>> hello world!
+```
+getvalue()方法用于获得写入后的str。
+seek()/tell()
+
+# 操作文件和目录
+```py
+import os
+print(os.name)      # 操作系统类型
+print(os.environ)   # 环境变量
+print(os.environ.get('PATH')) # 获取环境变量某个值
+print(os.path.abspath('.'))   # 查看当前目录的绝对路径
+```
+建立目录
+```py
+import os
+
+cpath = os.path.abspath('.')
+dpath = os.path.join(cpath, 'testdir') # 创建一个新目录 testdir 使用join可以正确处理Linux与windows的路径分隔符
+os.mkdir(dpath)
+os.rmdir(dpath) # 删除目录
+
+os.path.split('/Users/michael/testdir/file.txt') # 拆分成两部分，后一部分总是最后级别的目录或文件名 ('/Users/michael/testdir', 'file.txt')
+os.path.splitext('/path/to/file.txt') # 取得文件扩展名 ('/path/to/file', '.txt')
+os.rename('test.txt', 'test.py') # 重命名文件
+os.remove('test.py') # 删除文件
+
+```
+shutil 模块提供了 copyfile()的函数，模块中有很多使用函数，它们可以看作是os模块的补充
+```py
+[x for x in os.listdir('.') if os.path.isdir(x)] # listdir 列出当前目录下文件
+```
+
+```py
+[x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py'] # listdir 列出当前目录下.py文件
+```
+
+# 序列化
+Python提供了pickle模块来实现序列化
+```py
+import pickle
+d = dict(name='Bob', age=33, score=99)
+print(pickle.dumps(d)) # pickle.dumps()方法把任意对象序列化成一个bytes
+
+f = open('dump.txt', 'wb')
+pickle.dump(d, f) # pickle.dump()直接把对象序列化后写入一个file-like Object
+f.close()
+
+f = open('dump.txt', 'rb')
+d = pickle.load(f) # pickle.load()
+f.close()
+print(d)
+```
+## JSON
+```py
+>>> import json
+>>> d = dict(name='alex', age=33, score=88)
+>>> json.dumps(d) # json.dumps() 序列化 返回一个str,内容就是标准的JSON
+'{"name": "alex", "age": 33, "score": 88}'
+
+>>> json_str ='{"age":20, "score": 99, "age":99}'
+>>> json.loads(json_str) # 反序列化
+{'age': 99, 'score': 99}
+```
+
+```py
+import json
+
+class Student(object):
+    def __init__(self, name, age, score):
+        self.name = name
+        self.age = age
+        self.score = score
+
+s = Student('alex', 33, 89)
+
+def student2dict(std):
+    return {
+        'name': std.name,
+        'age': std.age,
+        'score': std.score
+    }
+
+print(json.dumps(s, default=student2dict)) #可选参数default就是把任意一个对象变成一个可序列为JSON的对象
+
+print(json.dumps(s, default=lambda obj: obj.__dict__)) #通常class的实例都有一个__dict__属性，它就是一个dict，用来存储实例变量。也有少数例外，比如定义了__slots__的class。
+
+
+jsonstr = json.dumps(s, default=student2dict)
+
+def dict2student(d):
+    return Student(d['name'], d['age'], d['score'])
+
+print(json.loads(jsonstr, object_hook=dict2student)) # 反序列化
+```
+
+
+
 
 # 特殊变量
 ```py
