@@ -495,8 +495,6 @@ logging.info("n = %d" % n) #根据上面设置的等级 使用对应的方法 lo
 > $ python -m pdb test.py
 启动后输入命令 **l**查看代码 **n**单步执行代码 **p**查看变量 **q** 退出
 
-> **package**: <br >tkinter<br > pygame <br >types <br >logging<br >
-
 在py文件中 可能出错的地方放一个pdb.set_trace() 可以设置断点
 ```py
 import pdb
@@ -713,3 +711,4 @@ s = json.dumps(obj, ensure_ascii=True) #
 # __getattr__
 # __call__
 ```
+> **package**: <br >tkinter<br > pygame <br >types <br >logging<br >
