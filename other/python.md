@@ -698,7 +698,10 @@ def dict2student(d):
 
 print(json.loads(jsonstr, object_hook=dict2student)) # 反序列化
 ```
-
+```py
+obj = dict(name='小明同学', age=20)
+s = json.dumps(obj, ensure_ascii=True) #
+```
 
 
 
