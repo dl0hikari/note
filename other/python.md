@@ -702,13 +702,41 @@ s = json.dumps(obj, ensure_ascii=True) #
 ```
 
 
+# 正则
 
+> re.DOTALL
+> re.IGNORECASE re.I
+> re.VERBOSE  忽略空白和注释
+
+# 编码问题
+``` py
+ open(filepath, 'r', encoding='utf-8')
+
+ soup = bs4.BeautifulSoup(res.text, 'html.parser')
+```
 # 特殊变量
 ```py
 # __str__与 __repr__
-# __iter)__ __next__
+# __iter__ __next__
 # __getitem__ __setitem__
 # __getattr__
 # __call__
 ```
 > **package**: <br >tkinter<br > pygame <br >types <br >logging<br >
+
+
+
+# 按装virtualenv
+提示timeout是网络问题 开全局
+```cmd
+pip --default-timeout=100 install virtualenv
+```
+使用virtualenv命令建一个虚拟环境，自动下载相关工具
+```cmd
+virtualenv venv
+```
+使用管理员权限打开cmd
+执行activate文件
+```cmd
+....venv\Scripts>activate
+```
