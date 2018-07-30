@@ -14,3 +14,13 @@
 >* home: 家目录（用户目录）
 >* opt （option）: 可选目录（可以选择安装应用程序的目录）
 >* usr （user）: 用户程序目录
+
+
+# 安装vim
+ubuntu:
+> sudo apt-get install vim-gtk
+
+centos:
+> yum -y install vim*
+
+* 显示行号: set nu, 取消行号 set nonu

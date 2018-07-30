@@ -740,3 +740,44 @@ virtualenv venv
 ```cmd
 ....venv\Scripts>activate
 ```
+退出虚拟环境
+```cmd
+deactivate
+```
+
+# 查看已安装的包
+
+```cmd
+pip show packagename
+
+pip list
+
+pip list –outdated  #检测更新
+
+pip install --upgrade packagename #升级包
+
+pip uninstall packagename #卸载包
+```
+
+# flask 模板修改不需要重起
+
+```py
+    #...
+    if __name__ == '__main__':
+        app.jinja_env.auto_reload = True
+        app.config['TEMPLATES_AUTO_RELOAD'] = True
+        # app.run(debug=True, host='0.0.0.0')
+        manager.run()
+```
+
+# python hell.py shell 进入不了command line
+因为没有引入flask_script 中的Manager
+
+# 设置获取环境变量
+用Python Shell设置或获取环境变量的方法：
+一、设置系统环境变量
+1、os.environ['环境变量名称']='环境变量值' #其中key和value均为string类型
+2、os.putenv('环境变量名称', '环境变量值')
+二、获取系统环境变量
+1、os.environ['环境变量名称']
+2、os.getenv('环境变量名称')
