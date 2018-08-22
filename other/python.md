@@ -781,3 +781,47 @@ pip uninstall packagename #卸载包
 二、获取系统环境变量
 1、os.environ['环境变量名称']
 2、os.getenv('环境变量名称')
+
+# SQLite 删除列
+https://www.jianshu.com/p/79ff2b2af493
+https://blog.csdn.net/White_Idiot/article/details/78533046
+
+# sqlalchemy
+使用传统的connection的方式连接和操作数据库
+```py
+from sqlalchemy import create_engine
+
+engine = create_engine('sqlite:///:db_path:', echo=True)
+conn = engine.connect()
+res = conn.execute('select * from users')
+for row in res:
+    print(row)
+```
+connection事务
+```py
+# ...
+with engine.connect() as conn:
+    trans = conn.begin()
+    try:
+        r1 = conn.execute("select * from users")
+        r2 = conn.execute("insert into User(name, age) values(?, ?)", 'alex', 24)
+        trans.commit()
+    except:
+        trans.rollback()
+        raise
+```
+通过session
+```py
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine('sqlite:///:db_path:', echo=True)
+DB_Session = sessionmaker(bind=engine)
+session = DB_Session()
+# dosomething with session
+session.execute('select * from User')
+session.execute("insert into User(name, age) values('alex', 33)")
+session.execute("insert into User(:name, :age)", {'name':'alex', 'age':11}) #参数使用dict,在sql语句中使用:key占位
+session.commit() #如果是增删改 需要commit
+session.close()
+```
