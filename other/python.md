@@ -787,7 +787,7 @@ https://www.jianshu.com/p/79ff2b2af493
 https://blog.csdn.net/White_Idiot/article/details/78533046
 
 # sqlalchemy
-使用传统的connection的方式连接和操作数据库
+**使用传统的connection的方式连接和操作数据库**
 ```py
 from sqlalchemy import create_engine
 
@@ -797,7 +797,7 @@ res = conn.execute('select * from users')
 for row in res:
     print(row)
 ```
-connection事务
+**connection事务**
 ```py
 # ...
 with engine.connect() as conn:
@@ -810,7 +810,7 @@ with engine.connect() as conn:
         trans.rollback()
         raise
 ```
-通过session
+**通过session**
 ```py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -824,4 +824,49 @@ session.execute("insert into User(name, age) values('alex', 33)")
 session.execute("insert into User(:name, :age)", {'name':'alex', 'age':11}) #参数使用dict,在sql语句中使用:key占位
 session.commit() #如果是增删改 需要commit
 session.close()
+```
+**ORM**
+```py
+# User.py
+from sqlalchemy import Column, Integer, String
+from Models import Base
+
+class User(Base):
+    __tablename__ = 'User'
+    id = Column('id', Integer, primary_key=True, autoincrement=True)
+    name = Column('name', String(50))
+    age = Column('age', Integer)
+# Role.py
+from Models import Base
+
+class Role(Base):
+    __tablename__ = 'Role'
+    id = Column('id', Integer, primary_key=True, autoincrement=True)
+    name = Column('name', String(50))
+
+# Models.py
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+# manage.py
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from User import User
+from Role import Role
+from Models import Base
+
+DB_CONNECT_STRING = 'sqlite:///test.sqlite'
+engine = create_engine(DB_CONNECT_STRING, echo=True)
+DB_Session = sessionmaker(bind=engine)
+session = DB_Session()
+Base.metadata.create_all(engine)
+
+u = User(name='alex', age=33)
+r = Role(name='user')
+
+session.add(u)
+session.add(r)
+session.commit()
+print(r.id)
 ```
