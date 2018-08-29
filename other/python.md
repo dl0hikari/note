@@ -870,3 +870,37 @@ session.add(r)
 session.commit()
 print(r.id)
 ```
+# UTC 协调世界时
+Coordinated Universal Time，UTC
+
+# 使用flask-moment 问题
+1. 引用flask-moment模块,需要引用moment.js与jquery.js,如果使用bootstrap/base.html模板则jquery已经在scripts块中引入，
+只需要引用moment.js。
+```py
+from flask import Flask
+from flask_moment import Moment
+app = Flask(__name__)
+moment = Moment(app)
+# ...
+```
+```html
+<!-- ... -->
+<p>The local date and time is {{ moment(current_time).format('LLL') }}</p>
+<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+<!-- ... -->
+{% block scripts  %}
+{{ super() }}
+{{ moment.include_moment() }} <!-- 注意加载顺序 -->
+{% endblock %}
+<!-- ... -->
+```
+```html
+<!-- ... -->
+<!-- 添加在head块中 需要重新引入jquery moment已提供方法引入即可 -->
+{% block head  %}
+{{ super() }}
+{{ moment.include_jquery() }}
+{{ moment.include_moment() }} <!-- 注意加载顺序 -->
+{% endblock %}
+<!-- ... -->
+```
