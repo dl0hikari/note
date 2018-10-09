@@ -826,6 +826,7 @@ session.commit() #如果是增删改 需要commit
 session.close()
 ```
 **ORM**
+对象关系映射（英语：(Object Relational Mapping，简称ORM，或O/RM，或O/R mapping）
 ```py
 # User.py
 from sqlalchemy import Column, Integer, String
