@@ -905,3 +905,99 @@ moment = Moment(app)
 {% endblock %}
 <!-- ... -->
 ```
+
+# nginx 服务器搭建
+1. python 环境
+```
+$ sudo apt-get install python-setuptools
+$ sudo easy_install pip
+
+```
+也可以直接安装pip
+```
+$ sudo apt-get install python-pip
+```
+2. 安装虚拟环境
+```
+$ sudo apt-get install virtualenv
+```
+3. 创建虚拟环境
+```
+$ virtualenv venv3 --no-site-packages --python=python3 #python3环境
+$ virtualenv venv --no-site-packages --python=python2 #python2环境
+```
+4. 安装uwsgi依赖
+```
+$ sudo apt-get install build-essential python-dev（这是两个包）
+```
+5. 进入虚拟环境
+```
+$ source venv3/bin/activate
+```
+
+6. 安装uwsgi
+```
+(venv3) $ pip install uwsgi
+```
+
+7. 安装flask及工程依赖包
+
+```
+(venv3) $ pip install -r requirements.txt
+```
+ps: pip freeze > requirements.txt
+
+8. 安装Nginx 修改nginx配置 启动服务
+```
+$ sudo apt-get install nginx
+```
+配置文件路径  /etc/nginx/sites-enabled/default
+```
+server {
+    listen 80;                   # 服务器监听端口
+    server_name 110.110.110.110; # 这里写你的域名或者公网IP
+    charset      utf-8;          # 编码
+    client_max_body_size 75M;    # 之前写的关于GET和POST的区别，这里应该是原因之一吧
+
+    location / {
+        include uwsgi_params;         # 导入uwsgi配置
+        uwsgi_pass 127.0.0.1:8000;    # 转发端口，需要和uwsgi配置当中的监听端口一致
+        uwsgi_param UWSGI_PYTHON /home/自己创建的目录/venv;       # Python解释器所在的路径（这里为虚拟环境）
+        uwsgi_param UWSGI_CHDIR /home/自己创建的目录;             # 项目根目录
+        uwsgi_param UWSGI_SCRIPT manage:app; （比如你测试用test.py文件，文件中app = Flask(__name__)，那么这里就填  test：app）# 项目的主程序
+    }
+}
+
+#server {
+#    listen 3001;
+#    server_name 127.0.0.1;
+#    charset utf-8;
+#    client_max_body_size 75M;
+#    root /usr/local/webserver/www/;
+#    index test.py;
+#    location / {
+#        include uwsgi_params;
+#        uwsgi_pass 127.0.0.1:3002;
+#        uwsgi_param UWSGI_PYTHON /home/pi/ENV;
+#        uwsgi_param UWSGI_CHDIR /home/pi/Documents/flasky_alex;
+#        uwsgi_param UWSGI_SCRIPT test:app;
+#    }
+#}
+```
+```
+$ sudo /etc/init.d/nginx start
+```
+9. 编写uwsgi配置文件
+```
+[uwsgi]
+socket = 127.0.0.1:3002
+plugins = python
+chdir = /home/pi/Documents/flasky_alex
+wsgi-file = manage.py
+callable = manage
+```
+
+10. 运行uwsgi
+```
+$ uwsgi --ini ini的文件名.ini &
+```
