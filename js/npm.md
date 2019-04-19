@@ -28,3 +28,10 @@
 
 > sudo apt-get install packagename
 
+# node-sass 安装不成功 问题解决办法
+1. 安装windows-build-tools
+2. 在  windows-build-tools 安装路径下安装python2.7
+3. npm config set python2.7的路径
+4. npm config set msvs_version 2015
+5. 切换npm源指向tiaobao源
+6. 安装
