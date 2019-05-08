@@ -1001,3 +1001,10 @@ callable = manage
 ```
 $ uwsgi --ini ini的文件名.ini &
 ```
+
+
+11. pipenv 相关命令执行报错 UnicodeDecodeError: 'utf-8' codec can't decode byte 0xbc in position 4: invalid start byte
+    是因为进程中存在中文进程 关闭就可以启动了
+
+    pipenv shell 显示激活
+    pipenv run python hello.py  这个命令允许你不显示激活虚拟环境即可在当前项目的虚拟环境中执行命令
