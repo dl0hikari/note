@@ -920,6 +920,13 @@ $ sudo apt-get install python-pip
 2. 安装虚拟环境
 ```
 $ sudo apt-get install virtualenv
+
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+
+window 下
+pip install virtualenvwrapper-win
+
 ```
 3. 创建虚拟环境
 ```
@@ -1008,3 +1015,6 @@ $ uwsgi --ini ini的文件名.ini &
 
     pipenv shell 显示激活
     pipenv run python hello.py  这个命令允许你不显示激活虚拟环境即可在当前项目的虚拟环境中执行命令
+
+12. Python IDLE的shell 历史记录 alt + n  alt + p
+
