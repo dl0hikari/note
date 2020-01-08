@@ -16,10 +16,14 @@ module.exports = function(env, args){
         module: {
             rules: [
                 // css
-                {test: /\.(scss)$/i, use: [
-                    _env.production ? {loader: MiniCssExtractPlugn.loader, options: {
+                {test: /\.(scss)$/i, use: [                    
+                    // _env.production ? {loader: MiniCssExtractPlugn.loader, options: {
+                    //     publicPath: '../'
+                    // }} : 'style-loader',
+
+                    {loader: MiniCssExtractPlugn.loader, options: {
                         publicPath: '../'
-                    }} : 'style-loader',
+                    }},
                     'css-loader',
                     {loader: 'postcss-loader', options: {
                         plugins: [

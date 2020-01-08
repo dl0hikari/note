@@ -2,6 +2,7 @@ const HtmlWebpackPlugin=require('html-webpack-plugin');
 const StylelintPlugin=require('stylelint-webpack-plugin');
 const path=require('path');
 const glob=require('glob');
+const MiniCssExtrectPlugin=require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
@@ -14,9 +15,11 @@ module.exports = {
         })
     ],
     devtool: 'source-map',
-    // devServer: {
-
-    // }
+    devServer: {
+        port: 3000,
+        progress: true,
+        host: 'localhost'
+    }
 };
 
 glob.sync(path.resolve(__dirname, '../', 'templates', '*.html')).forEach(tplPath => {
@@ -24,6 +27,7 @@ glob.sync(path.resolve(__dirname, '../', 'templates', '*.html')).forEach(tplPath
         new HtmlWebpackPlugin({
             template: 'html-loader?interpolate!' + tplPath,
             filename: path.basename(tplPath)
-        })
+        }),
+        new MiniCssExtrectPlugin()
     )
 });
