@@ -16,6 +16,9 @@ module.exports = {
     ],
     devtool: 'source-map',
     devServer: {
+        historyApiFallback: true,
+        disableHostCheck: true, // 绕过主机检查
+        // allowedHosts: [],
         port: 3000,
         progress: true,
         host: 'localhost'
