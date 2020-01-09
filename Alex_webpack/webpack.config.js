@@ -1,5 +1,5 @@
 
-const MiniCssExtractPlugn=require('mini-css-extract-plugin');
+const MiniCssExtractPlugin=require('mini-css-extract-plugin');
 
 module.exports = function(env, args){
     const _env = env || {};
@@ -21,7 +21,7 @@ module.exports = function(env, args){
                     //     publicPath: '../'
                     // }} : 'style-loader',
 
-                    {loader: MiniCssExtractPlugn.loader, options: {
+                    {loader: MiniCssExtractPlugin.loader, options: {
                         publicPath: '../'
                     }},
                     'css-loader',
@@ -47,7 +47,7 @@ module.exports = function(env, args){
                         outputPath: 'imgs/', // 表示输出文件路径前缀
                         limit: 4*1024,
                         esModule: false,
-                        // publicPath: '../'
+                        // publicPath: '../test' // 打包文件中引用图片文件的路径前缀--优先级高于output下的publicPath 高于 MiniCssExtractPlugin下的publicPath
                     }}
                 ]},
                 // fonts

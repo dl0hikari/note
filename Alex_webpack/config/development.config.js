@@ -31,6 +31,9 @@ glob.sync(path.resolve(__dirname, '../', 'templates', '*.html')).forEach(tplPath
             template: 'html-loader?interpolate!' + tplPath,
             filename: path.basename(tplPath)
         }),
-        new MiniCssExtrectPlugin()
+        new MiniCssExtrectPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[id].css'
+        })
     )
 });
