@@ -12,11 +12,14 @@ module.exports = function(env, args){
         conf = require('./config/test.config');
     }
     return {
-        entry: './src/js/index',
+        entry: {
+          main: './src/js/index',
+          vendor: ['jquery']
+        },
         module: {
             rules: [
                 // css
-                {test: /\.(scss)$/i, use: [                    
+                {test: /\.(scss)$/i, use: [
                     // _env.production ? {loader: MiniCssExtractPlugn.loader, options: {
                     //     publicPath: '../'
                     // }} : 'style-loader',

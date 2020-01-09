@@ -7,7 +7,8 @@ const MiniCssExtrectPlugin=require('mini-css-extract-plugin');
 module.exports = {
     mode: 'development',
     output: {
-        filename: "bundle.min.js"
+        filename: "js/[name].js",
+        path: path.resolve(__dirname, '../build')
     },
     plugins: [
         new StylelintPlugin({
@@ -21,7 +22,8 @@ module.exports = {
         // allowedHosts: [],
         port: 3000,
         progress: true,
-        host: 'localhost'
+        host: 'localhost',
+        publicPath: '/build/'
     }
 };
 
@@ -31,6 +33,9 @@ glob.sync(path.resolve(__dirname, '../', 'templates', '*.html')).forEach(tplPath
             template: 'html-loader?interpolate!' + tplPath,
             filename: path.basename(tplPath)
         }),
-        new MiniCssExtrectPlugin()
+        new MiniCssExtrectPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[id].css'
+        })
     )
 });

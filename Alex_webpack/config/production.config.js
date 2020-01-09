@@ -11,7 +11,7 @@ const glob=require('glob');
 module.exports = {
     mode: 'development',
     output: {
-        filename: "bundle.min.js",
+        filename: "js/[name].js",
         path: path.resolve(__dirname, '../build'),
         // publicPath: 'http://www.baidu.com/'
     },
