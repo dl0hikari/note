@@ -13,7 +13,7 @@ module.exports = {
     output: {
         filename: "js/[name].js",
         path: path.resolve(__dirname, '../build'),
-        // publicPath: 'http://www.baidu.com/'
+        // publicPath: 'http://www.baidu.com/'  // 打包文件中引用文件的路径前缀
     },
     plugins: [
         new StylelintPlugin({
