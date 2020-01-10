@@ -27,7 +27,10 @@ module.exports = function(env, args){
                     {loader: MiniCssExtractPlugin.loader, options: {
                         publicPath: '../'
                     }},
-                    'css-loader',
+                    {loader: 'css-loader', options: {
+                        // modules: true,
+                        // localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                    }},
                     {loader: 'postcss-loader', options: {
                         plugins: [
                             require('autoprefixer')
@@ -36,20 +39,22 @@ module.exports = function(env, args){
                     'sass-loader'
                 ]},
                 // js
-                {test: /\.(js|jsx)$/, use: [
-                    {loader: 'babel-loader', options: {
-                        presets: ['@babel/preset-env']
-                    }},
-                    {loader: 'eslint-loader', options: {
-                        exclude: /node_modules/
-                    }}
-                ]},
+                {
+                    test: /\.(js|jsx)$/, 
+                    use: [
+                        {loader: 'babel-loader', options: {
+                            presets: ['@babel/preset-env']
+                        }},
+                        'eslint-loader'
+                    ],
+                    exclude: /node_modules/
+                },
                 // img
                 {test: /\.(png|jpg|gif)$/i, use: [
                     {loader: 'url-loader', options: {
                         outputPath: 'imgs/', // 表示输出文件路径前缀
                         limit: 4*1024,
-                        esModule: false,
+                        esModule: false,  // html文件中src引用显示 [object Module]
                         // publicPath: '../test' // 打包文件中引用图片文件的路径前缀--优先级高于output下的publicPath 高于 MiniCssExtractPlugin下的publicPath
                     }}
                 ]},
