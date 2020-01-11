@@ -18,7 +18,23 @@ module.exports = function(env, args){
         },
         module: {
             rules: [
-                // css
+                // css scss
+                {test: /\.(css)$/i, use: [
+                    {loader: MiniCssExtractPlugin.loader, options: {
+                        publicPath: '../'
+                    }},
+                    {loader: 'css-loader', options: {
+                        modules: {
+                          mode: 'local',
+                          localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        }
+                    }},
+                    {loader: 'postcss-loader', options: {
+                        plugins: [
+                            require('autoprefixer')
+                        ]
+                    }}
+                ]},
                 {test: /\.(scss)$/i, use: [
                     // _env.production ? {loader: MiniCssExtractPlugn.loader, options: {
                     //     publicPath: '../'
@@ -28,8 +44,10 @@ module.exports = function(env, args){
                         publicPath: '../'
                     }},
                     {loader: 'css-loader', options: {
-                        // modules: true,
-                        // localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        modules: {
+                          mode: 'local',
+                          localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        }
                     }},
                     {loader: 'postcss-loader', options: {
                         plugins: [
@@ -40,7 +58,7 @@ module.exports = function(env, args){
                 ]},
                 // js
                 {
-                    test: /\.(js|jsx)$/, 
+                    test: /\.(js|jsx)$/,
                     use: [
                         {loader: 'babel-loader', options: {
                             presets: ['@babel/preset-env']
