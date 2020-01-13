@@ -23,12 +23,7 @@ module.exports = function(env, args){
                     {loader: MiniCssExtractPlugin.loader, options: {
                         publicPath: '../'
                     }},
-                    {loader: 'css-loader', options: {
-                        modules: {
-                          mode: 'local',
-                          localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                        }
-                    }},
+                    'css-loader',
                     {loader: 'postcss-loader', options: {
                         plugins: [
                             require('autoprefixer')
@@ -36,19 +31,10 @@ module.exports = function(env, args){
                     }}
                 ]},
                 {test: /\.(scss)$/i, use: [
-                    // _env.production ? {loader: MiniCssExtractPlugn.loader, options: {
-                    //     publicPath: '../'
-                    // }} : 'style-loader',
-
                     {loader: MiniCssExtractPlugin.loader, options: {
                         publicPath: '../'
                     }},
-                    {loader: 'css-loader', options: {
-                        modules: {
-                          mode: 'local',
-                          localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                        }
-                    }},
+                    'css-loader',
                     {loader: 'postcss-loader', options: {
                         plugins: [
                             require('autoprefixer')

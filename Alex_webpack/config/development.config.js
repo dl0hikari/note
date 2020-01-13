@@ -17,13 +17,18 @@ module.exports = {
     ],
     devtool: 'source-map',
     devServer: {
-        historyApiFallback: true,
+        // historyApiFallback: true,  // 当使用HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html
+        historyApiFallback: {
+            rewrites: [
+              { from: /./, to: '/build/404.html' }
+            ]
+        },
         disableHostCheck: true, // 绕过主机检查
         // allowedHosts: [],
         port: 3000,
         progress: true,
         host: 'localhost',
-        publicPath: '/build/'
+        publicPath: '/build/' // 与output path 相配合
     }
 };
 
