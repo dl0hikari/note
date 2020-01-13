@@ -12,7 +12,7 @@ module.exports = {
     },
     plugins: [
         new StylelintPlugin({
-            files: ['**/*.css', '**/*.sass', '**/*.html', '**/*.vue']
+            files: ['**/*.css', '**/*.scss', '**/*.html', '**/*.vue']
         })
     ],
     devtool: 'source-map',

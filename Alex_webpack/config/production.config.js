@@ -17,7 +17,7 @@ module.exports = {
     },
     plugins: [
         new StylelintPlugin({
-            files: ['**/*.css', '**/*.sass', '**/*.html', '**/*.vue']
+            files: ['**/*.css', '**/*.scss', '**/*.html', '**/*.vue']
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtrectPlugin({

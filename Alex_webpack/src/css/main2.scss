@@ -1,9 +1,0 @@
-.main{
-    background: url(./img/2.png) top left no-repeat;
-}
-
-.list{
-    &:before{
-        content: "my list";
-    }
-}

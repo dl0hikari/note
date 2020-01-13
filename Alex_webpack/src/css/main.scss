@@ -1,6 +1,15 @@
-@import './normalize';
-@import './main2.scss';
-@import './common_css_file.css';
+.main{
+  width: 500px;
+  height: 500px;
+  background: url(./img/2.png) top left no-repeat;
+}
+
+.list{
+  &:before{
+    content: "my list";
+  }
+}
+
 .container{
   margin: 0 auto;
   width: 1140px;
@@ -14,12 +23,6 @@
 
   font-size: 14px;
   color: #737373;
-}
-
-.main{
-  width: 500px;
-  height: 500px;
-  background-color: #f00;
 }
 
 .page404{

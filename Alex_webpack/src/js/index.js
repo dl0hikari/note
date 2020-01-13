@@ -1,4 +1,4 @@
-import '../css/main.scss';
+import '../css/index.scss';
 import style from '../css/provide_to_module.scss';
 import $ from 'jquery';
 const sum = (a, b) => {
