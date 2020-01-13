@@ -1,6 +1,7 @@
 import '../css/main.scss';
 import '../css/main2.scss';
-import style from '../css/main3.css';
+import '../css/common_css_file.css';
+import style from '../css/provide_to_module.css';
 import $ from 'jquery';
 const sum = (a, b) => {
     return a + b;
