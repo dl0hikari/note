@@ -71,6 +71,11 @@ module.exports = function(env, args){
                 ]}
             ]
         },
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            }
+        },
         ...conf
 
     }

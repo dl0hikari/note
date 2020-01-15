@@ -1,31 +1,30 @@
-.main{
+.main {
   width: 500px;
   height: 500px;
   background: url(./img/2.png) top left no-repeat;
 }
 
-.list{
-  &:before{
+.list {
+  &::before {
     content: "my list";
   }
 }
 
-.container{
+.container {
   margin: 0 auto;
   width: 1140px;
 }
 
-.Nav{
+.Nav {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
-
   font-size: 14px;
   color: #737373;
 }
 
-.page404{
+.page404 {
   font-size: 34px;
   text-align: center;
 }
