@@ -3,7 +3,6 @@ $bootstrap-sass-asset-helper: false !default;
 // Variables
 // --------------------------------------------------
 
-
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
@@ -21,7 +20,6 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
@@ -37,7 +35,6 @@ $link-color:            $gray-dark !default;
 $link-hover-color:      #922100 !default;
 //** Link hover decoration.
 $link-hover-decoration: none !default;
-
 
 //== Typography
 //
@@ -94,17 +91,16 @@ $grid-columns:              12 !default;
 //** Padding between columns. Gets divided in half for the left and right.
 $grid-gutter-width:         15px !default;
 
-
 //== Container sizes
 $container-max:                 $screen-size-1 !default;
 
 //== Susy config
 $susy: (
-        container: $container-max,
-        gutter-position: inside-static,
-        columns: $grid-columns,
-        column-width: 120px,
-        gutter: $grid-gutter-width / 120px,
+  container: $container-max,
+  gutter-position: inside-static,
+  columns: $grid-columns,
+  column-width: 120px,
+  gutter: $grid-gutter-width / 120px,
 );
 
 //框架相关

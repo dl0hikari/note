@@ -2,7 +2,6 @@
 // Scaffolding
 // --------------------------------------------------
 
-
 // Reset the box-sizing
 //
 // Heads up! This reset may cause conflicts with some third-party widgets.
@@ -11,17 +10,16 @@
 * {
   box-sizing: border-box;
 }
+
 *:before,
 *:after {
   box-sizing: border-box;
 }
 
-
 // Body reset
-
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -42,7 +40,6 @@ textarea {
   line-height: inherit;
 }
 
-
 // Links
 
 a {
@@ -57,7 +54,6 @@ a {
   }
 }
 
-
 // Figures
 //
 // We reset this here because previously Normalize had no `figure` margins. This
@@ -67,7 +63,6 @@ figure {
   margin: 0;
 }
 
-
 // Images
 
 img {
@@ -75,15 +70,14 @@ img {
   max-width: 100%;
 }
 
-
 // Perfect circle
 .img-circle {
   border-radius: 50%; // set radius in percents
 }
-.img-block{
+
+.img-block {
   width: 100%;
 }
-
 
 // iOS "clickable elements" fix for role="button"
 //
@@ -95,10 +89,18 @@ img {
   cursor: pointer;
 }
 
-ul{margin: 0; padding: 0; list-style: none}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-.relative{position: relative}
-.fr{float: right;}
-.fl{float: left;}
-.clearfix{@include clearfix;}
-.invisible{visibility: hidden}
+.relative { position: relative; }
+
+.fr { float: right; }
+
+.fl { float: left; }
+
+.clearfix { @include clearfix; }
+
+.invisible { visibility: hidden; }
