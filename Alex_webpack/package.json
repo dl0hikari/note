@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server --open --env.development",
-    "build": "webpack --env.production"
+    "start": "webpack-dev-server --env.development --open",
+    "build": "webpack --env.production",
+    "dll": "webpack --config webpack.vendor.config.js",
+    "dashboard": "webpack-dashboard -- webpack-dev-server --open --env.development"
   },
   "keywords": [
     "alex"
@@ -23,6 +25,7 @@
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.3",
     "file-loader": "^5.0.2",
+    "happypack": "^5.0.1",
     "html-loader": "^0.5.5",
     "jest": "^24.9.0",
     "jquery": "^3.4.1",
@@ -39,6 +42,7 @@
     "url-loader": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
+    "webpack-dashboard": "^3.2.0",
     "webpack-dev-server": "^3.10.1"
   },
   "devDependencies": {
@@ -57,9 +61,17 @@
     "rules": {
       "selector-pseudo-element-colon-notation": null,
       "no-descending-specificity": null,
-      "at-rule-no-unknown": [true, {"ignoreAtRules" :[
-        "mixin", "extend", "content", "include"
-      ]}]
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "mixin",
+            "extend",
+            "content",
+            "include"
+          ]
+        }
+      ]
     }
   },
   "jest": {

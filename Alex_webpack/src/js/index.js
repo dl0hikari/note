@@ -8,5 +8,5 @@ const sum = (a, b) => {
     return a + b;
 };
 
-$('.main').html(sum(1, 8));
+$('.main').html(sum(1, 9));
 console.log(style.main);

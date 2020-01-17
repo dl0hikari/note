@@ -6,6 +6,7 @@ const Uglifyjs=require('uglifyjs-webpack-plugin');
 const MiniCssExtrectPlugin=require('mini-css-extract-plugin');
 const OptimizeCssAssetPlugin=require('optimize-css-assets-webpack-plugin');
 const glob=require('glob');
+const HappyPack = require('happypack');
 
 
 module.exports = {
@@ -33,7 +34,18 @@ module.exports = {
             },
             canPrint: true
         }),
-        new Uglifyjs()
+        new Uglifyjs(),
+        new HappyPack({
+            id: 'js',
+            loaders: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            ]
+        })
     ]
 };
 

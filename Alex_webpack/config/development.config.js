@@ -3,6 +3,9 @@ const StylelintPlugin=require('stylelint-webpack-plugin');
 const path=require('path');
 const glob=require('glob');
 const MiniCssExtrectPlugin=require('mini-css-extract-plugin');
+const HappyPack = require('happypack');
+const DashboardPlugin=require('webpack-dashboard/plugin');
+const webpack=require('webpack');
 
 module.exports = {
     mode: 'development',
@@ -13,7 +16,24 @@ module.exports = {
     plugins: [
         new StylelintPlugin({
             files: ['**/*.css', '**/*.scss', '**/*.html', '**/*.vue']
-        })
+        }),
+        new MiniCssExtrectPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[id].css'
+        }),
+        new HappyPack({
+            id: 'js',
+            loaders: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            ]
+        }),
+        new DashboardPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
     devtool: 'source-map',
     devServer: {
@@ -28,7 +48,8 @@ module.exports = {
         port: 3000,
         progress: true,
         host: 'localhost',
-        publicPath: '/build/' // 与output path 相配合
+        publicPath: '/build/', // 与output path 相配合
+        // hot: true,
     }
 };
 
@@ -37,10 +58,6 @@ glob.sync(path.resolve(__dirname, '../', 'templates', '*.html')).forEach(tplPath
         new HtmlWebpackPlugin({
             template: 'html-loader?interpolate!' + tplPath,
             filename: path.basename(tplPath)
-        }),
-        new MiniCssExtrectPlugin({
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[id].css'
         })
     )
 });

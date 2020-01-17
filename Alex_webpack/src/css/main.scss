@@ -21,10 +21,14 @@
   flex-wrap: nowrap;
   justify-content: space-around;
   font-size: 14px;
-  color: #737373;
+
+  a {
+    color: #737373;
+  }
 }
 
 .page404 {
   font-size: 34px;
   text-align: center;
+  line-height: 2;
 }

@@ -45,13 +45,14 @@ module.exports = function(env, args){
                 // js
                 {
                     test: /\.(js|jsx)$/,
-                    use: [
-                        {loader: 'babel-loader', options: {
-                            presets: ['@babel/preset-env']
-                        }},
-                        'eslint-loader'
-                    ],
-                    exclude: /node_modules/
+                    // use: [
+                    //     {loader: 'babel-loader', options: {
+                    //         presets: ['@babel/preset-env']
+                    //     }},
+                    //     'eslint-loader'
+                    // ],
+                    exclude: /node_modules/,
+                    loader: 'happypack/loader?id=js'
                 },
                 // img
                 {test: /\.(png|jpg|gif)$/i, use: [
