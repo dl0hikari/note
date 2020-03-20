@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "create-react-app": "^3.3.0"
+  },
+  "devDependencies": {}
+}

@@ -1,25 +1,30 @@
-import * as React from 'react';
-import * as ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from "react-dom";
 import styled from 'styled-components';
+import Input from 'src/Components/Input';
 
-const TestWrap = styled.div`
+const Test = styled.div`
     color: red;
     font-size: 24px;
 
-    span{
+    /* span{
         font-size: 50px;
-    }
+    } */
 `;
+
+const TestExtend = styled(Test)`
+    background-color: #0f0;
+`;
+
 
 class App extends React.Component {
     public render() {
         return (
-            <div>
-                <TestWrap>
-                    hello react
-                    <span>haha</span>
-                </TestWrap>
-            </div>
+            <TestExtend>
+                hello react
+                <span>haha</span>
+                <Input  />
+            </TestExtend>
         );
     }
 

@@ -1,0 +1,378 @@
+
+    body{
+        padding: 0;
+        margin: 0;
+        background: #0e2a43;
+    }
+    body::-webkit-scrollbar{
+        display: none;
+    }
+    /* 听课排行 */
+
+    #part1{
+        position: absolute;
+        left: 144px;
+        top: 30px;
+        width: 800px;
+        height: 366px;
+        font-size: 32px;
+        color: #ffffff;
+        /* border: 1px solid #0000ff; */
+        z-index: 1;
+        overflow: hidden;
+    }
+    #part1 .title{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    #part1 .lcenter-list{
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+    #part1 .lcenter-list-items-wrapper{
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+    }
+    #part1 .lcenter-list-items{
+        position: relative; top: 0;
+        float: left;
+    }
+    #part1 .row-blue{
+        background-color: #00baff!important;
+        font-size: 12px;
+        /* text-align: center; */
+    }
+    #part1 .row{
+        float: left;
+        width: 100%;
+        line-height: 50px;
+        height: 50px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: #0a2732;
+        transition: all 1s ease-in-out;
+    }
+    /* #part1 .row:nth-of-type(2n){
+        background-color: #003b51;
+    } */
+    #part1 .odd{
+        background-color: #003b51;
+    }
+    #part1 .cell{
+        float: left;
+        white-space: nowrap;
+        width: 6%;
+    }
+    #part1 .cell2{
+        float: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 70%;
+    }
+    #part1 .cell3{
+        float: right;
+        white-space: nowrap;
+        width: 20%;
+    }
+    #part1 .row .num{
+        background-color: #00baff;
+        font-weight: normal;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        vertical-align: middle;
+        border-radius: 12.5px;
+        text-align: center;
+        margin: 12.5px auto;
+    }
+    /* 地图 */
+    #allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+
+    #part2{
+        position: absolute;
+        left: 1140px;
+        top: 30px;
+        width: 650px;
+        z-index: 2;
+    }
+    #part2 .login-today{
+        float: left;
+        width: 300px;
+    }
+    #part2 .login-today .title{
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 32px;
+    }
+    #part2 .login-today .count{
+        font-weight: bolder;
+        font-size: 48px;
+        color: #00c0ff;
+    }
+    #part2 .login-today .count:after{
+        content: '人次';
+        color: #ffffff;
+        font-size: 30px;
+    }
+    #part2 .login-today .count_s2:after{
+        content: '%';
+    }
+    #part2 .login-today .count_s3:after{
+        content: '人次';
+    }
+    #part2 .login-yesterday{
+        float: right;
+        width: 300px;
+    }
+
+    #part2 .login-yesterday .title{
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 32px;
+    }
+    #part2 .login-yesterday .count{
+        font-weight: bolder;
+        font-size: 48px;
+        color: #00c0ff;
+    }
+    #part2 .login-yesterday .count:after{
+        content: '人次';
+        color: #ffffff;
+        font-size: 30px;
+    }
+    #part2 #people-count .count:after{
+        content: '人';
+    }
+    .pc_and_mobile{
+        position: relative;
+        left: 80px; top: 20px;
+        text-align: center
+    }
+    .pc_and_mobile .icon{
+        display: inline-block;
+        width: 70px;
+    }
+    .pc_and_mobile .content{
+        color: #ffffff;
+    }
+    #map{
+        position: absolute;
+        left: 800px;
+        top: 275px;
+        width: 1200px;
+        height: 800px;
+        /* border: 1px solid #00ff00; */
+    }
+    .datav-layout {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        width: 1920px;
+        height: 1200px;
+        overflow: hidden;
+        /* background: #0e2a43; */
+    }
+    /* 课程热度排行榜 */
+    #part3{
+        position: absolute;
+        display: table;
+        width: 800px;
+        height: 56px;
+        left: 144px;
+        top: 432px;
+        font-size: 32px;
+        color: #ffffff;
+        /* border: 1px solid #ffffff; */
+        z-index: 3;
+    }
+    #part3 .title{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    #part4{
+        position: absolute;
+        top: 750px; left: 70px;
+        overflow: hidden;
+        z-index: 4;
+    }
+    .svg-wrapper{
+        float: left;
+        position: relative;
+        width: 300px; height: 300px;
+    }
+    #part4 .circle{
+        transition: stroke-dasharray 1s;
+        -webkit-transition: stroke-dasharray 1s;
+    }
+    #part4 .content{
+        position: absolute;
+        top: 0; left: 0;
+        margin-top: 135px;
+        width: 100%;
+        text-align: center;
+        color: #ffffff;
+        font-size: 18px;
+    }
+    #part4 .content .percent{
+        font-size: 24px;
+        line-height: 2;
+    }
+    .hot-courses{
+        position: relative;
+        width: 100%;
+        line-height: 38px;
+        font-size: 15px;
+        height: 230px; overflow: hidden;
+        transform-style: preserve-3d;
+    }
+    .hot-courses .item{
+        margin-bottom: 10px;
+        backface-visibility: hidden;
+    }
+    .hot-courses .item .num{
+        float: left;
+        width: 58px;
+        background: #00baff;
+        border-radius: 3px;
+        text-align: center;
+    }
+    .hot-courses .item .course{
+        width: 692px;
+        margin-left: 68px;
+        text-align: left;
+        overflow: hidden;
+    }
+    .hot-courses .item .course .color{
+        box-sizing: border-box;
+        padding-left: 20px;
+        border-radius: 3px;
+        background: linear-gradient(90deg, #00baff 0%, #0082fa 100%);
+        white-space: nowrap;
+    }
+
+    @keyframes frontToBack{
+        from{
+            transform: rotateX(0);
+        }
+        to{
+            transform: rotateX(180deg);
+        }
+    }
+    @keyframes backToFront{
+        from{
+            transform: rotateX(180deg);
+        }
+        to{
+            transform: rotateX(0);
+        }
+    }
+    .front_to_back{
+        animation: frontToBack 2s forwards;
+        /* animation-play-state: paused; */
+    }
+    .back_to_front{
+        animation: backToFront 2s forwards;
+        /* animation-play-state: paused; */
+    }
+
+    .selectColor{
+        position: absolute;
+        left: calc(100% - 5px);
+        top: 350px;
+        width: 15px;
+        list-style: none;
+        padding: 0; margin: 0;
+        border: 1px solid #fff;
+    }
+    .selectColor:hover{
+        animation: colorMenu .5s forwards;
+    }
+    .selectColor li{
+        float: left;
+        width: 15px; height: 15px;
+        text-indent: -9999px;
+        cursor: pointer;
+    }
+    .pc_user_count:after{
+        content: '%'
+    }
+    .mobile_user_count:after{
+        content: '%'
+    }
+
+    @keyframes colorMenu{
+        form{
+            left: calc(100% - 5px);
+        }
+        to{
+            left: calc(100% - 16px);
+        }
+    }
+
+    @keyframes poundHeart{
+        form{
+            transform: none;
+        }
+        50%{
+            transform: scale(1.1);
+        }
+        to{
+            transform: none;
+        }
+    }
+    .welcome{
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #003b51;
+        z-index: 9;
+    }
+    .welcome img{
+        position: fixed;
+        left: calc(50% - 159px);
+        top: calc(50% - 22px);
+        width: 318px; height: 45px;
+        animation: poundHeart 1s;
+        animation-iteration-count:2;
+    }
+
+
+    .loading {
+        margin: 0 auto;
+        padding: 0;
+        position: absolute;
+        left: calc(50% - 285px);
+        top: calc(50% - 117px);
+        transform: scale(0.6);
+    }
+    .loading svg {
+        width: 100%;
+        height: 100%;
+    }
+    .loading #pulsar {
+        stroke-dasharray: 281;
+        -webkit-animation: dash 2.5s infinite linear forwards;
+        animation: dash 2.5s infinite linear forwards;
+    }
+    /*Animation*/
+
+    @-webkit-keyframes dash {
+        from {
+            stroke-dashoffset: 814;
+        }
+        to {
+            stroke-dashoffset: -814;
+        }
+    }
+    @keyframes dash {
+        from {
+            stroke-dashoffset: 814;
+        }
+        to {
+            stroke-dashoffset: -814;
+        }
+    }
