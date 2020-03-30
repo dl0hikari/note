@@ -29,7 +29,9 @@
 
 				        </tbody>
 				        </table>
-						<br />返回<a href="http://www.dayanmei.com">老李</a>
+            <br />
+
+            <button id="my-button" data-clipboard-target="#bar">Copy to Clipboard</button>
 <!-- <script src="./js/clipboard.js"></script> -->
 
 <script>
@@ -42,11 +44,12 @@
   }
   if (IEVersion <= DEFAULT_VERSION) {
     $.getScript('./js/ZeroClipboard.min.js', function(){
-      var clip = new ZeroClipboard($(".copy_btn"), {
+      var clip = new ZeroClipboard($("#my-button"), {
         moviePath: "./js/ZeroClipboard.swf"
       });
       clip.on( 'mousedown', function(client) {
-          clip.setText($(this).val());
+          var contentId = $(this).attr('data-clipboard-target');
+          $(contentId).length > 0 ? clip.setText($(contentId).val()) : '' ;
       });
       clip.on( 'complete', function(client, args) {
         alert('代码已经复制到您的剪贴板,使用ctrl+v粘贴或者右键粘贴。');
@@ -54,7 +57,7 @@
     });
   } else {
     $.getScript('https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.min.js', function(){
-      var clipboardDemos=new ClipboardJS(".copy_btn");
+      var clipboardDemos=new ClipboardJS("#my-button");
       clipboardDemos.on('success',function(e){
         alert('代码已经复制到您的剪贴板,使用ctrl+v粘贴或者右键粘贴。');
       });
