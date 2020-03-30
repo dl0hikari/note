@@ -8,31 +8,61 @@
   <meta name="Description" content="ZeroClipboard.swf使用方法以及api和结合jquery使用">
   <title>ZeroClipboard.swf使用演示(demo) api javascript(js)</title>
   <script src="./js/jquery.min.js"></script>
-  <script src="./js/ZeroClipboard.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script> -->
  </head>
  <body>
   <table id="ad_quick_list" cellspacing="5" cellpadding="5">
 				            <tbody>
 				            <tr>
-				                <td class="leftClass" style="width: 60px;">JS代码:</td>
+                        <td class="leftClass" style="width: 60px;">JS代码:</td>
+                        <input id="bar" value="https://github.com/zenorocha/clipboard.js.git">
 				                <td>
-				                    <textarea class="ad_js_code code_area test" style="cursor:pointer;width:600px;height:60px;" id="click_ad_js_code"><script src="http://www.dayanmei.com/?kid=183,375,23&type=js"></script></textarea>
+				                    <textarea class="ad_js_code code_area copy_btn" data-clipboard-target="#bar" style="cursor:pointer;width:600px;height:60px;" id="click_ad_js_code"><script src="http://www.dayanmei.com/?kid=183,375,23&type=js"></script></textarea>
 				                </td>
 				            </tr>
 				            <tr>
 				                <td class="leftClass" style="width: 60px;">iframe代码:</td>
 				                <td>
-				                    <textarea class="ad_iframe_code code_area" style="cursor:pointer;width:600px;height:60px;" id="click_ad_iframe_code"><iframe src="http://www.dayanmei.com/?kid=183,375,23" style="width:120px;height:400px;margin:0;padding:0;" frameborder="no" border="0"></iframe></textarea>
+				                    <textarea class="ad_iframe_code code_area copy_btn" style="cursor:pointer;width:600px;height:60px;" id="click_ad_iframe_code"><iframe src="http://www.dayanmei.com/?kid=183,375,23" style="width:120px;height:400px;margin:0;padding:0;" frameborder="no" border="0"></iframe></textarea>
 				                </td>
 				            </tr>
 
 
 				        </tbody>
 				        </table>
-            <br />
+						<br />返回<a href="http://www.dayanmei.com">老李</a>
+<!-- <script src="./js/clipboard.js"></script> -->
 
-            <button class="copy_btn">copy text</button>
-<script src="./js/clipboard.js"></script>
+<script>
+  var DEFAULT_VERSION = 8.0;
+  var ua = navigator.userAgent.toLowerCase();
+  var isIE = ua.indexOf('msie') > -1;
+  var IEVersion;
+  if (isIE) {
+    IEVersion = ua.match(/msie ([\d.]+)/)[1];
+  }
+  if (IEVersion <= DEFAULT_VERSION) {
+    $.getScript('./js/ZeroClipboard.min.js', function(){
+      var clip = new ZeroClipboard($(".copy_btn"), {
+        moviePath: "./js/ZeroClipboard.swf"
+      });
+      clip.on( 'mousedown', function(client) {
+          clip.setText($(this).val());
+      });
+      clip.on( 'complete', function(client, args) {
+        alert('代码已经复制到您的剪贴板,使用ctrl+v粘贴或者右键粘贴。');
+      });
+    });
+  } else {
+    $.getScript('https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.min.js', function(){
+      var clipboardDemos=new ClipboardJS(".copy_btn");
+      clipboardDemos.on('success',function(e){
+        alert('代码已经复制到您的剪贴板,使用ctrl+v粘贴或者右键粘贴。');
+      });
+      clipboardDemos.on('error',function(e){
+
+      });
+    });
+  }
+</script>
  </body>
 </html>
