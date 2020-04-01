@@ -1,0 +1,17 @@
+@import '~@imgSource/test.scss';
+
+.test {
+  a {
+    color: #000;
+
+    &:hover {
+      color: #f00;
+    }
+  }
+}
+
+.content {
+  width: 100px;
+  height: 100px;
+  background: url("~@imgSource/杂志效果图_03.jpg") center center no-repeat;
+}

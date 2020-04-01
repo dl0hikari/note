@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+</head>
+<body>
+  ${require("html-loader?minimize=false!./block/header.html")}
+  <div class="test">
+    <a href="#">index</a>
+  </div>
+
+  <img src="../assets/img/杂志效果图_03.jpg" alt="">
+  <img src="${require('@imgSource/杂志效果图_03.jpg')}" alt="">
+  <div class="content"></div>
+  <!-- asdfasdf -->
+</body>
+</html>
